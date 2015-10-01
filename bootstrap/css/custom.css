@@ -1,0 +1,334 @@
+.spinner {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+  margin: 100px auto;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  -webkit-animation: bounce 2.0s infinite ease-in-out;
+  animation: bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bounce {
+  0%, 100% { 
+	transform: scale(0.0);
+	-webkit-transform: scale(0.0);
+  } 50% { 
+	transform: scale(1.0);
+	-webkit-transform: scale(1.0);
+  }
+}
+
+#mainSection {
+	padding-top: 53px;
+}
+
+.icon-bar {
+	background-color: #428bca;
+}
+
+#nav {
+	background-color: white;
+	position: relative;
+	z-index: 10;
+}
+
+.headerBlackJack {
+	background-color: white;
+	position: relative;
+	z-index: 10;
+	margin: 0;
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+
+#playingTable {
+	background: url('../../pool_table/pool_table.png') repeat;
+	padding: 10px;
+	overflow: hidden;
+	position: relative;
+	/*border-radius: 5px;*/
+}
+
+.dealer-location-container {
+	position: absolute;
+	left: 50%;
+}
+
+.dealer-location {
+	position: relative;
+	left: -50%;
+	top: 81px;
+	opacity: 0.4;
+	width: 547px;
+	height: 85px;
+	border-radius: 53%;
+	box-shadow: 0px 22px 0 2px white;
+}
+
+.player-location-container {
+	position: absolute;
+	left: 50%;
+}
+
+.player-location {
+	position: relative;
+	left: -92%;
+	width: 120px;
+	height: 177px;
+	top: 240px;
+	border: solid 3px white;
+	opacity: 0.4;
+	border-radius: 5px;
+	border-radius: 5px;
+}
+
+#dealer-hand .card-container {
+	top: -348px;
+}
+
+#player-hand .card-container {
+	top: -500px;
+}
+
+#main-bet {
+	position: relative;
+	left: 50%;
+}
+
+#insurance-bet{
+	position: relative;
+	left: 50%;
+	/*left: -99%;
+	top: -500px;*/
+}
+
+.card-container {
+	/*visibility: hidden;*/
+	position: absolute;
+	left: 0;
+	right: 0;
+	-webkit-transform: rotate(330deg);
+}
+
+.card-span {
+	display: block;
+}
+
+.card-outline {
+	width: 95px;
+	font-size: 15px;
+	text-align: center;
+	padding: 10px;
+	margin: 10px auto;
+	background: #f2edee;
+}
+
+.card-not-visible {
+	height: 146px;
+	width: 95px;
+	text-align: center;
+	margin: 9px auto;
+	background: url('../../pool_table/card_back.jpg');
+}
+
+.card-top {
+	width: 25%;
+	text-align: center;
+}
+
+.card-center {
+	font-size: 30px;
+}
+
+.card-bottom {
+	width: 25%;
+	text-align: center;
+	transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+}
+
+.card-shadow {
+	box-shadow: 1px 1px 3px #000;
+	-moz-box-shadow: 1px 1px 3px #000;
+	-webkit-box-shadow: 1px 1px 3px #000;
+}
+
+.card-rounded {
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+.card-black {
+	color: black;
+}
+
+.card-red {
+	color: #d90f31;
+}
+
+.card-alert {
+	text-align: center;
+}
+
+#player-actions {
+	position: relative;
+}
+
+.card-buttons {
+	margin: 10px auto;	/*float: none ;*/
+	text-align: center;
+}
+
+.card-buttons button {
+	-webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -ms-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+
+.help-buttons {
+	margin: 10px auto;	/*float: none ;*/
+	text-align: center;
+}
+
+.card-hand {
+	position: relative;
+	text-align: center;
+	min-height: 166px;
+}
+
+.stats-table {
+	background-color: rgb(175, 175, 175);
+	color: #505050;
+	margin: 0 auto 20px auto;
+	max-width: 245px;
+	border-collapse: separate;
+	border-spacing: 0;
+	border-radius: 5px;
+}
+
+.stats-table td, .stats-table th {
+	text-align: center;
+}
+
+.stats-table tbody tr th {
+	border-top: none;
+}
+
+#stats p {
+	float: left;
+	margin-right: 5px;
+	background-color: #ccfff7;
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1.428571429;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	-webkit-user-select: none;
+}
+
+#beneath-table{
+	position: relative;
+	height: 30px;
+	background-color: white;
+}
+.chip-container {
+	margin-top: 300px;
+	position: absolute;
+	list-style: none;
+	z-index: 1;
+}
+
+.chip-list {
+	left: -211px;
+	top: 238px;
+	position: absolute;
+}
+.insurance-list {
+	left: 64px;
+	top: 69px;
+	position: absolute;
+}
+.from-dealer{
+	margin-top: -523px;
+}
+
+.pokerchip{
+	margin:.5em;
+	font-size:1.2em;
+	position:relative;
+	display:inline-block;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+	width: 62px;
+	height: 62px;
+	background:#555;
+	border-radius:50%;
+	position:relative;
+	border:.5em dashed white;
+	transition:all .5s ease;
+	backface-visibility:hidden;
+}
+
+.pokerchip.red{
+	background:#DD4631;
+}
+.pokerchip.gray{
+	background:#b0b0b0;
+}
+
+.pokerchip.flat{
+	box-shadow:0 0 0 .2em #fff;
+}
+
+.pokerchip.default{
+ /* position: absolute;*/
+}
+
+body.modal-open {
+	  margin-right: 0px;
+}
+
+.cheat-keyboard {
+	font-weight: normal;
+}
+
+.hint {
+
+	-webkit-box-shadow: 2px 0px 20px 11px rgba(239, 42, 169, 1);
+	-moz-box-shadow: 2px 0px 20px 11px rgba(239, 42, 169, 1);
+	box-shadow: 2px 0px 20px 11px rgba(239, 42, 169, 1);
+}

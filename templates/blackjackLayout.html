@@ -1,0 +1,437 @@
+<div class="container">
+	<h1 class="headerBlackJack">Blackjack</h1>
+	<div id="playingTable">
+		<div class="player-location-container"><div class="player-location"></div></div>
+		<div class="dealer-location-container"><div class="dealer-location"></div></div>
+		<div id="dealer-hand"></div>
+		<div id="main-bet"></div>
+		<div id="player-hand"></div>
+		<div id="insurance-bet"></div>
+			
+		
+		<div id="player-actions">
+			<div class="card-buttons">
+				<button type="button" data-action='split' class="btn btn-warning split playerAction" disabled="disabled">Split</button>
+				<button type="button" data-action='double' class="btn btn-warning doubleDown playerAction" disabled="disabled">Double Down</button>
+				<button type="button" data-action='surrender' class="btn btn-warning surrender playerAction" disabled="disabled">Surrender</button>
+				<button type="button" class="btn btn-warning insurance" disabled="disabled">Insurance</button>
+			</div>
+
+			<div class="card-buttons">
+				<button type="button" data-action='hit'	class="btn btn-default hit playerAction" disabled="disabled">Hit</button>
+				<button type="button" data-action='stand'	class="btn btn-primary stand playerAction standDeal">Stand</button>
+			</div>
+			<div id="stats"></div>
+			<div class="help-buttons">
+				<button type="button" class="btn btn-info js-cheat-sheet" data-toggle="modal" data-target="#cheatSheetModal">Cheat Sheet</button>
+				<button type="button" class="btn btn-info js-strategy" data-toggle="modal" data-target="#strategyModal">Strategy</button>
+				<button type="button" class="btn btn-info js-hint">Hint</button>
+			</div>
+			
+		</div>
+	
+		<div id="endGameMessage">
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="cheatSheetModal" tabindex="-1" role="dialog" aria-labelledby="cheatSheetModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Cheat Sheet</h4>
+					</div>
+					<div class="modal-body">
+						<dl class="dl-horizontal">
+							<h4>Player Actions</h4>
+							<dt>Hit  <span class="cheat-keyboard">[<i class="fa fa-keyboard-o"></i> F]</span></dt>
+							<dd>Take another card from dealer</dd>
+							<dt>Stand  <span class="cheat-keyboard">[<i class="fa fa-keyboard-o"></i> Space]</span></dt>
+							<dd>Take no more cards. Ends player turn.</dd>
+							<dt>Split  <span class="cheat-keyboard">[<i class="fa fa-keyboard-o"></i> A]</span></dt>
+							<dd>Option that is available if both cards dealt to player are of same value. They will be split into two hands which they player plays both separately. On this blackjack tutorial, split should be chosen if strategy mandates it, but the hand is not split and the player's next action should be treated as if split is not available. Only available first turn.</dd>
+							<dt>Double Down  <span class="cheat-keyboard">[<i class="fa fa-keyboard-o"></i> S]</span></dt>
+							<dd>Increase bet by 100% followed by taking one hit and standing. Only available first turn.</dd>
+							<dt>Surrender  <span class="cheat-keyboard">[<i class="fa fa-keyboard-o"></i> D]</span></dt>
+							<dd>House takes half of player's bet. Player automatically loses. Only available first turn.</dd>
+							<dt>Insurance  <span class="cheat-keyboard">[<i class="fa fa-keyboard-o"></i> G]</span></dt>
+							<dd>Available if dealer's face-up card is an ace. This is a side bet that the dealer has blackjack. Only available first turn.</dd>
+						</dl>
+						<h4>General Gameplay</h4>
+						<p>The <strong>player</strong> receives two cards face-up and the <strong>dealer</strong> receives one card face-up and another card face-down. The object of the game is for the player to reach 21 or closer to 21 than the dealer without going over 21. Face-cards are counted as 10. Aces count as either 1 or 11. A hand with the ace counting as 11 is known as a soft hand while a hand with the ace counting as 1 is called a hard hand. If the player's count is over 21 or the dealer gets closer to 21 than the player without going over 21, the player loses. After the players <strong>stands</strong>, the dealer will hit until the dealer has a total of 17 or more. A <strong>blackjack</strong> occurs when a player has one 10 value card and one ace. The player will automatically win a hand with blackjack unless the dealer also has it, which results in a push, or a tie.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="strategyModal" tabindex="-1" role="dialog" aria-labelledby="strategyModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Blackjack Strategy Table</h4>
+					</div>
+					<div class="modal-body">
+						<table border="1" class="table table-bordered" >
+							<tbody><tr>
+							<th rowspan="2">Player hand</th>
+							<th colspan="10">Dealer's face-up card</th>
+							</tr>
+							<tr>
+							<td>2</td>
+							<td>3</td>
+							<td>4</td>
+							<td>5</td>
+							<td>6</td>
+							<td>7</td>
+							<td>8</td>
+							<td>9</td>
+							<td>10</td>
+							<td>A</td>
+							</tr>
+							<tr>
+							<th colspan="11">Hard totals (excluding pairs)</th>
+							</tr>
+							<tr>
+							<th>17–20</th>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							</tr>
+							<tr>
+							<th>16</th>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:white; color:black">SU</td>
+							<td style="background:white; color:black">SU</td>
+							<td style="background:white; color:black">SU</td>
+							</tr>
+							<tr>
+							<th>15</th>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:white; color:black">SU</td>
+							<td style="background:lime; color:black">H</td>
+							</tr>
+							<tr>
+							<th>13–14</th>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							</tr>
+							<tr>
+							<th>12</th>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							</tr>
+							<tr>
+							<th>11</th>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:lime; color:black">H</td>
+							</tr>
+							<tr>
+							<th>10</th>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							</tr>
+							<tr>
+							<th>9</th>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							</tr>
+							<tr>
+							<th>5–8</th>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							</tr>
+							<tr>
+							<th colspan="11">Soft totals</th>
+							</tr>
+							<tr>
+							<td></td>
+							<td>2</td>
+							<td>3</td>
+							<td>4</td>
+							<td>5</td>
+							<td>6</td>
+							<td>7</td>
+							<td>8</td>
+							<td>9</td>
+							<td>10</td>
+							<td>A</td>
+							</tr>
+							<tr>
+							<th>A,8–A,9</th>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							</tr>
+							<tr>
+							<th>A,7</th>
+							<td style="background:red; color:black">S</td>
+							<td style="background:cyan; color:black">Ds</td>
+							<td style="background:cyan; color:black">Ds</td>
+							<td style="background:cyan; color:black">Ds</td>
+							<td style="background:cyan; color:black">Ds</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							</tr>
+							<tr>
+							<th>A,6</th>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							</tr>
+							<tr>
+							<th>A,4–A,5</th>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							</tr>
+							<tr>
+							<th>A,2–A,3</th>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							</tr>
+							<tr>
+							<th colspan="11">Pairs</th>
+							</tr>
+							<tr>
+							<td></td>
+							<td>2</td>
+							<td>3</td>
+							<td>4</td>
+							<td>5</td>
+							<td>6</td>
+							<td>7</td>
+							<td>8</td>
+							<td>9</td>
+							<td>10</td>
+							<td>A</td>
+							</tr>
+							<tr>
+							<th>A,A</th>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							</tr>
+							<tr>
+							<th>10,10</th>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							</tr>
+							<tr>
+							<th>9,9</th>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:red; color:black">S</td>
+							<td style="background:red; color:black">S</td>
+							</tr>
+							<tr>
+							<th>8,8</th>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							</tr>
+							<tr>
+							<th>7,7</th>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							</tr>
+							<tr>
+							<th>6,6</th>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							</tr>
+							<tr>
+							<th>5,5</th>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:cyan; color:black">Dh</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							</tr>
+							<tr>
+							<th>4,4</th>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							</tr>
+							<tr>
+							<th>2,2–3,3</th>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:yellow; color:black">SP</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							<td style="background:lime; color:black">H</td>
+							</tr>
+							</tbody></table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

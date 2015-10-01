@@ -1,0 +1,14 @@
+{{#visible}}
+	<div class="card-outline card-shadow card-rounded {{displayColor suit}}">
+	<div class="card-top"><span class="card-span">{{displayName numId}}</span><span class="card-span">{{{displaySuit suit}}}</span></div>
+	<div class="card-center">{{{displaySuit suit}}}</div>
+	<div class="card-bottom pull-right"><span class="card-span">{{displayName numId}}</span><span class="card-span">{{{displaySuit suit}}}</span></div>
+	<div class="clearfix"></div>
+	</div>
+{{/visible}}
+
+{{^visible}}
+<div class="card-shadow card-rounded card-not-visible">
+	
+</div>
+{{/visible}}
