@@ -1,0 +1,16 @@
+
+<div class="alert alert-info card-alert"><p>{{message}}</p>
+
+{{#insurance}}
+	{{#insuranceWon}}
+	<p>Dealer has blackjack. You win insurance.</p>
+	{{/insuranceWon}}
+	{{^insuranceWon}}
+	<p>Dealer does not have blackjack. You lose insurance.</p>
+	{{/insuranceWon}}
+{{/insurance}}
+
+{{#each strategyErrors}}
+<p>{{this}}</p>
+{{/each}}
+
