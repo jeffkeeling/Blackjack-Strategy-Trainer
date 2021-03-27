@@ -2,7 +2,7 @@
 Memorize traditional blackjack strategy and keep track of your success. Built with Backbone.js, Marionette.js and the Greensock animation library
 
 ## Demo
-http://blackjack.jeffkeeling.me
+http://jeffkeeling.github.io/Blackjack-Strategy-Trainer/
 
 ### Author
 Jeff Keeling
